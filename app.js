@@ -3,7 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cron = require('node-cron');
+const job = require("./cron-jobs");
+const db = require("./config/database");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -38,6 +40,25 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// cron-jobs
+
+  // cron.schedule('*/2 * * * *', () => {
+  //   console.log('running a task every two minutes');
+  // });
+
+  // cron.schedule('* * * January,September Sunday', () => {
+  //   console.log('running on Sundays of January and September');
+  // });
+
+  // cron.schedule('0 1 * * *', () => {
+  //   console.log('Running a job at 01:00 at America/Sao_Paulo timezone');
+  // }, {
+  //   scheduled: true,
+  //   timezone: "America/Sao_Paulo"
+  // });
+
+
+
 /// events
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
@@ -52,4 +73,7 @@ eventEmitter.on('scream', myEventHandler);
 
 //Fire the 'scream' event:
 eventEmitter.emit('scream');
+
+
+
 module.exports = app;
