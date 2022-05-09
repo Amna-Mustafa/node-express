@@ -4,6 +4,7 @@ const classroomController = require('../controllers').classroom;
 const studentController = require('../controllers').student;
 const lecturerController = require('../controllers').lecturer;
 const courseController = require('../controllers').course;
+const userController = require('../controllers').user;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -33,4 +34,6 @@ router.post('/api/course', courseController.add);
 router.put('/api/course/:id', courseController.update);
 router.delete('/api/course/:id', courseController.delete);
 
+router.get('/api/user', userController.list);
+router.post('/api/user', userController.add);
 module.exports = router;
